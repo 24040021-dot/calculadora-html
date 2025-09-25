@@ -1,0 +1,154 @@
+:root{
+  --page-bg-1: #2148aa;
+  --page-bg-2: #08142a;
+  --panel: rgba(255,255,255,0.03);
+  --glass: rgba(255,255,255,0.02);
+  --accent: #64d0ff;
+  --num: #bfeecb;
+  --op: #ffd66b;
+  --danger: #ff9b9b;
+  --text: #edf6ff;
+  --muted: #98aac1;
+  --shadow: 0 18px 40px rgba(3,8,20,0.65);
+}
+
+/* Reset y base */
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:'Segoe UI', Roboto, system-ui, -apple-system,'Helvetica Neue',Arial;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+
+/* Fondo liso y nocturno */
+body{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:30px;
+  background: linear-gradient(180deg, var(--page-bg-1) 0%, var(--page-bg-2) 100%);
+  background-attachment: fixed;
+}
+
+/* Contenedor calculadora */
+.calculadora{
+  width:360px;
+  max-width:96vw;
+  padding:18px;
+  border-radius:16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.03);
+  box-shadow: var(--shadow);
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 66px;
+  gap:12px;
+  backdrop-filter: blur(6px) saturate(120%);
+}
+
+/* Pantalla única */
+.pantalla{
+  grid-column: 1 / -1;
+  height:92px;
+  border-radius:12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.006));
+  color: var(--text);
+  font-size:2rem;
+  font-weight:700;
+  padding:16px 18px;
+  text-align:right;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  box-shadow: inset 0 -8px 20px rgba(2,6,23,0.6);
+  position:relative;
+}
+.pantalla::before{
+  content: "Calculadora";
+  position:absolute;
+  left:14px;
+  top:10px;
+  font-size:0.78rem;
+  color:var(--muted);
+  font-weight:600;
+}
+
+/* Botones base */
+.Btn{
+  border:1px solid rgba(255,255,255,0.04);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005));
+  color:var(--text);
+  border-radius:10px;
+  font-size:1.05rem;
+  font-weight:600;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition: transform 120ms ease, box-shadow 160ms ease, background 160ms;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+  user-select:none;
+}
+.Btn:active{ transform: translateY(2px) scale(0.998); box-shadow: 0 4px 10px rgba(2,6,23,0.7); }
+.Btn:focus{ outline: 2px solid rgba(100,208,255,0.12); outline-offset:2px; }
+
+/* Funciones (C y borrar) */
+#c, #borrar{
+  background: linear-gradient(180deg, rgba(255,110,110,0.09), rgba(255,90,90,0.03));
+  color:#fff6f6;
+  border:1px solid rgba(255,90,90,0.06);
+}
+
+/* Dígitos */
+.digit{
+  background: linear-gradient(180deg, rgba(255,255,255,0.018), rgba(255,255,255,0.005));
+  color:var(--text);
+}
+
+/* Operadores en columna derecha */
+.operator{
+  background: linear-gradient(180deg, rgba(255,213,107,0.08), rgba(255,196,60,0.03));
+  color:#111;
+  border:1px solid rgba(255,200,80,0.06);
+  box-shadow: 0 10px 22px rgba(255,190,80,0.06);
+}
+
+/* Igual destacado */
+#igual{
+  background: linear-gradient(180deg, rgba(100,208,255,0.12), rgba(100,208,255,0.06));
+  color:#00182a;
+  font-weight:800;
+}
+
+/* Cero ocupa dos columnas */
+#cero{ grid-column: 1 / 3; }
+
+/* Forzar operadores en la última columna visualmente */
+.calculadora .operator{ grid-column: 4 / 5; }
+
+/* Posiciones fijas para asegurar cuadrícula ordenada */
+#c{ grid-column: 1 / 2; grid-row: 2 / 3; }
+#borrar{ grid-column: 2 / 3; grid-row: 2 / 3; }
+#op-div{ grid-column: 4 / 5; grid-row: 2 / 3; }
+
+#n7{ grid-column: 1 / 2; grid-row: 3 / 4; }
+#n8{ grid-column: 2 / 3; grid-row: 3 / 4; }
+#n9{ grid-column: 3 / 4; grid-row: 3 / 4; }
+#op-mul{ grid-column: 4 / 5; grid-row: 3 / 4; }
+
+#n4{ grid-column: 1 / 2; grid-row: 4 / 5; }
+#n5{ grid-column: 2 / 3; grid-row: 4 / 5; }
+#n6{ grid-column: 3 / 4; grid-row: 4 / 5; }
+#op-sub{ grid-column: 4 / 5; grid-row: 4 / 5; }
+
+#n1{ grid-column: 1 / 2; grid-row: 5 / 6; }
+#n2{ grid-column: 2 / 3; grid-row: 5 / 6; }
+#n3{ grid-column: 3 / 4; grid-row: 5 / 6; }
+#op-add{ grid-column: 4 / 5; grid-row: 5 / 6; }
+
+#cero{ grid-column: 1 / 3; grid-row: 6 / 7; }
+#dot{ grid-column: 3 / 4; grid-row: 6 / 7; }
+#igual{ grid-column: 4 / 5; grid-row: 6 / 7; }
+
+/* Responsividad */
+@media (max-width:420px){
+  .calculadora{ width:92vw; gap:10px; padding:14px; grid-auto-rows:58px; }
+  .pantalla{ height:78px; font-size:1.7rem; }
+  .Btn{ font-size:1rem; border-radius:9px; }
+}
